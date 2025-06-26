@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/evdev3
+evdev3.so
+evdev3.dylib
+evdev3.dll
+evdev3.a
+evdev3.lib
+evdev3-test-*
+*.exe
+*.o
+*.obj
+*.lst
