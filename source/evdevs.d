@@ -8,9 +8,9 @@ import what;
 
 struct
 Evdevs {
-    Evdev[]  _devs;  // name,fd,what
+    Evdev[]  _devs;            // name,fd,what,ready
+    int      _timeout = 1000;  // ms
     What     _what;
-    int      _timeout = 1000;
 
     alias   front    = _what;
     alias   empty    = _check_files;

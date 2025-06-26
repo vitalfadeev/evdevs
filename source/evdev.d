@@ -7,7 +7,8 @@ import what;
 
 struct 
 Evdev {
-    string _device;  // "/dev/input/event8"
+    string _device;          // "/dev/input/event8"
+    int    _timeout = 1000;  // ms
     File   _file;
     What   _what;
     bool   _ready;
@@ -19,6 +20,12 @@ Evdev {
 
     this (string device) {
         this._device = device;
+        _init ();
+    }
+
+    this (string device, int timeout) {
+        this._device  = device;
+        this._timeout = timeout;
         _init ();
     }
 
@@ -56,9 +63,9 @@ Evdev {
         // poll
         auto _polled =
             poll (
-                &fds, // file descriptors
-                1,    // number of file descriptors
-                0     // timeout ms
+                &fds,     // file descriptors
+                1,        // number of file descriptors
+                _timeout  // timeout ms
             );
 
         // check
@@ -112,9 +119,3 @@ Evdev {
             throw new InputException ("POLLERR");
     }
 }
-
-// dev state
-//   wait    -> poll -> if POLLIN ->
-//   pollin  -> read ->
-//   ready  -> take -> wait
-
